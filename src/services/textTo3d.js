@@ -1,5 +1,4 @@
 // src/services/textTo3d.js
-import { Client } from "@gradio/client";
 
 /**
  * Generates a 3D model from a text prompt
@@ -16,31 +15,77 @@ export async function textTo3d(prompt, options = {}) {
   const { variance = 0 } = options;
 
   try {
-    // Connect to the Gradio app
-    const client = await Client.connect("Roblox/cube3d-interactive");
+    // Base URLs for API interaction
+    const API_BASE_URL = 'https://roblox-cube3d-interactive.hf.space/gradio_api';
+    const BASE_DOWNLOAD_URL = `${API_BASE_URL}/file=`;
     
-    // Generate the 3D model
-    const response = await client.predict("/handle_text_prompt", { 
-      input_prompt: prompt, 
-      variance 
+    // Step 1: Initialize prediction with the text prompt
+    const initResponse = await fetch(`${API_BASE_URL}/call/handle_text_prompt`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        data: [prompt, variance]
+      })
     });
     
-    // Check if we got a valid response
-    if (!response || !response.data || !response.data[0] || !response.data[0].path) {
-      throw new Error('Invalid response from the model server');
+    if (!initResponse.ok) {
+      throw new Error(`HTTP error! Status: ${initResponse.status}`);
     }
     
-    // Extract file path to create download link
-    const BASE_DOWNLOAD_URL = "https://roblox-cube3d-interactive.hf.space/gradio_api/file=";
-    const filePath = response.data[0].path;
+    const initData = await initResponse.json();
     
-    // Return the download URL
-    const downloadUrl = `${BASE_DOWNLOAD_URL}${filePath}`;
+    // Extract the event ID from the response
+    const eventId = initData.event_id;
+    if (!eventId) {
+      throw new Error('No event ID received from server');
+    }
     
-    return downloadUrl;
+    // Step 2: Wait for the model to generate
+    // The model typically takes 5-15 seconds to generate
+    await new Promise(resolve => setTimeout(resolve, 12000));
+    
+    // Step 3: Fetch the result directly
+    const resultResponse = await fetch(`${API_BASE_URL}/call/handle_text_prompt/${eventId}`);
+    
+    if (!resultResponse.ok) {
+      throw new Error(`Failed to fetch result: ${resultResponse.status}`);
+    }
+    
+    // Get the raw text response
+    const resultText = await resultResponse.text();
+    
+    // Parse the SSE format - specifically looking for the data after 'event: complete'
+    const completionMatch = resultText.match(/event: complete\s*\n\s*data: (\[.*\])/);
+    if (!completionMatch || !completionMatch[1]) {
+      throw new Error('Could not find completion data in the response');
+    }
+    
+    // Parse the JSON data
+    try {
+      const jsonData = JSON.parse(completionMatch[1]);
+      
+      // Check if we have a file path
+      if (!jsonData || !jsonData[0] || !jsonData[0].path) {
+        throw new Error('No file path found in the completion data');
+      }
+      
+      // Extract the file path
+      const filePath = jsonData[0].path;
+      
+      // Construct the download URL
+      const downloadUrl = `${BASE_DOWNLOAD_URL}${filePath}`;
+      
+      return downloadUrl;
+      
+    } catch (error) {
+      console.error('Failed to parse completion data:', error);
+      throw new Error('Failed to parse the model data from the server');
+    }
     
   } catch (error) {
-    console.error("Error details:", error);
+    console.error('Error details:', error);
     throw new Error(`Failed to generate 3D model: ${error.message}`);
   }
 }

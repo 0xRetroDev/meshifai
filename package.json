@@ -1,6 +1,6 @@
 {
   "name": "@0xretrodev/meshifai",
-  "version": "0.1.1",
+  "version": "0.2.2",
   "description": "AI-powered tools for 3D model generation",
   "type": "module",
   "main": "src/index.js",
@@ -32,11 +32,10 @@
   },
   "contributors": [
     {
-      "name": "Reinhardt Weyers",
+      "name": "0xRetroDev",
       "url": "https://twitter.com/0xretrodev"
     }
   ],
   "dependencies": {
-    "@gradio/client": "^0.10.1"
   }
 }

@@ -1,13 +1,11 @@
 # Meshifai
 
-AI-powered tools for 3D model generation.
-
-![image](https://github.com/user-attachments/assets/87199a2d-8c58-4600-8c8e-caba895d5c15)
+AI-powered tools for 3D model generation
 
 ## Installation
 
 ```bash
-npm install meshifai
+npm install @0xretrodev/meshifai
 ```
 
 ## Usage
@@ -17,15 +15,19 @@ npm install meshifai
 Convert text descriptions into 3D models with a single function call.
 
 ```javascript
-import { textTo3d } from 'meshifai';
+// Method 1: Named import
+import { textTo3d } from '@0xretrodev/meshifai';
 
 // Basic usage
 const downloadUrl = await textTo3d("A futuristic spaceship");
 
 console.log("Download your 3D model:", downloadUrl);
 
-// With variance option for more creative results
-const creativeUrl = await textTo3d("A medieval castle", { variance: 0.3 });
+// Method 2: Default import
+import meshifai from '@0xretrodev/meshifai';
+
+// Object-style usage
+const creativeUrl = await meshifai.textTo3d("A medieval castle", { variance: 0.3 });
 
 console.log("Download your creative 3D model:", creativeUrl);
 ```
@@ -42,47 +44,14 @@ const url = await textTo3d("A luxury sports car", {
 });
 ```
 
-## Examples
+## Model Format
 
-### Using named import
+The generated 3D models are in `.glb` format (GL Transmission Format Binary), which is widely supported by:
 
-```javascript
-import { textTo3d } from 'meshifai';
-
-async function main() {
-  try {
-    // Generate a 3D model with just one line
-    const url = await textTo3d("A medieval castle on a hill");
-    
-    console.log("Your 3D model is ready!");
-    console.log("Download URL:", url);
-    
-  } catch (error) {
-    console.error("Error:", error.message);
-  }
-}
-
-main();
-```
-
-### Using default import
-
-```javascript
-import meshifai from 'meshifai';
-
-async function main() {
-  try {
-    // Generate a 3D model with the textTo3d function
-    const url = await meshifai.textTo3d("A cute cartoon dog");
-    console.log("Model URL:", url);
-    
-  } catch (error) {
-    console.error("Error:", error.message);
-  }
-}
-
-main();
-```
+- 3D modeling software like Blender
+- Game engines like Unity and Unreal
+- Web-based 3D viewers
+- AR/VR applications
 
 ## Future Services
 
