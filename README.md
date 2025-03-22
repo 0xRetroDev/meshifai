@@ -2,6 +2,8 @@
 
 AI-powered tools for 3D model generation.
 
+![image](https://github.com/user-attachments/assets/87199a2d-8c58-4600-8c8e-caba895d5c15)
+
 ## Installation
 
 ```bash
