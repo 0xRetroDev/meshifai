@@ -1,0 +1,42 @@
+{
+  "name": "@0xretrodev/meshifai",
+  "version": "0.1.0",
+  "description": "AI-powered tools for 3D model generation",
+  "type": "module",
+  "main": "src/index.js",
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [
+    "3d",
+    "text-to-3d",
+    "3d-model",
+    "ai",
+    "gradio",
+    "huggingface",
+    "mesh",
+    "meshifai"
+  ],
+  "author": "0xRetroDev",
+  "license": "MIT",
+  "homepage": "https://0xretro.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0xRetroDev/meshifai"
+  },
+  "bugs": {
+    "url": "https://github.com/0xRetroDev/meshifai/issues"
+  },
+  "contributors": [
+    {
+      "name": "Reinhardt Weyers",
+      "url": "https://twitter.com/0xretrodev"
+    }
+  ],
+  "dependencies": {
+    "@gradio/client": "^0.10.1"
+  }
+}

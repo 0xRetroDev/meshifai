@@ -1,6 +1,6 @@
 # Meshifai
 
-Easyt to use AI-powered tools for 3D model generation.
+AI-powered tools for 3D model generation.
 
 ## Installation
 
@@ -8,7 +8,7 @@ Easyt to use AI-powered tools for 3D model generation.
 npm install meshifai
 ```
 
-## Services
+## Usage
 
 ### Text to 3D Model
 
@@ -40,17 +40,46 @@ const url = await textTo3d("A luxury sports car", {
 });
 ```
 
-## TypeScript Support
+## Examples
 
-The package includes TypeScript definitions:
+### Using named import
 
-```typescript
+```javascript
 import { textTo3d } from 'meshifai';
 
-async function example(): Promise<void> {
-  const url: string = await textTo3d("A cute cartoon dog", { variance: 0.2 });
-  console.log(url);
+async function main() {
+  try {
+    // Generate a 3D model with just one line
+    const url = await textTo3d("A medieval castle on a hill");
+    
+    console.log("Your 3D model is ready!");
+    console.log("Download URL:", url);
+    
+  } catch (error) {
+    console.error("Error:", error.message);
+  }
 }
+
+main();
+```
+
+### Using default import
+
+```javascript
+import meshifai from 'meshifai';
+
+async function main() {
+  try {
+    // Generate a 3D model with the textTo3d function
+    const url = await meshifai.textTo3d("A cute cartoon dog");
+    console.log("Model URL:", url);
+    
+  } catch (error) {
+    console.error("Error:", error.message);
+  }
+}
+
+main();
 ```
 
 ## Future Services
