@@ -1,4 +1,4 @@
-# Meshifai
+# MeshifAI
 
 AI-powered tools for 3D model generation
 
