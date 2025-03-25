@@ -63,3 +63,7 @@ More AI-powered 3D services coming soon!
 ## License
 
 MIT
+
+## Support
+
+For support requests, please [contact us](mailto:hello@0xretro.dev) or open an issue.
