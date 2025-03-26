@@ -15,36 +15,25 @@ npm install @0xretrodev/meshifai
 
 ### Text to 3D Model
 
-Convert text descriptions into 3D models with a single function call.
+MeshifAI supports generating both textured and untextured 3D models from text prompts.
 
 ```javascript
-// Method 1: Named import
-import { textTo3d } from '@0xretrodev/meshifai';
+import meshifai from '@retrodev/meshifai';
 
-// Basic usage
-const downloadUrl = await textTo3d("A futuristic spaceship");
+// Generate an untextured model (faster and more reliable)
+const result = await textTo3d('A red apple');
+console.log(`Download URL: ${result.modelUrl}`);
 
-console.log("Download your 3D model:", downloadUrl);
-
-// Method 2: Default import
-import meshifai from '@0xretrodev/meshifai';
-
-// Object-style usage
-const creativeUrl = await meshifai.textTo3d("A medieval castle", { variance: 0.3 });
-
-console.log("Download your creative 3D model:", creativeUrl);
-```
-
-#### Options
-
-The `textTo3d` function accepts an optional second parameter with options:
-
-```javascript
-// The variance parameter (0-1) controls how creative the model generation is
-// Higher values produce more varied results
-const url = await textTo3d("A luxury sports car", { 
-  variance: 0.5 
+// Generate an untextured model with custom variance
+const customResult = await textTo3d('A red apple', { 
+  textured: false,
+  variance: 0.5
 });
+console.log(`Download URL: ${customResult.modelUrl}`);
+
+// Generate a textured model (experimental, takes longer to generate, but looks amazing!)
+const texturedResult = await meshifai.textTo3d('A red apple', { textured: true });
+console.log(`Download URL: ${texturedResult.modelUrl}`);
 ```
 
 ## Model Format

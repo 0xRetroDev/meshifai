@@ -1,6 +1,6 @@
 {
   "name": "@0xretrodev/meshifai",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "AI-powered tools for 3D model generation",
   "type": "module",
   "main": "src/index.js",
@@ -25,7 +25,7 @@
   "homepage": "https://0xretro.dev",
   "repository": {
     "type": "git",
-    "url": "https://github.com/0xRetroDev/meshifai"
+    "url": "https://github.com/0xRetroDev/meshifai-javascript"
   },
   "bugs": {
     "url": "https://github.com/0xRetroDev/meshifai/issues"
