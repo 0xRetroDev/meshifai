@@ -1,6 +1,6 @@
 {
   "name": "@0xretrodev/meshifai",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "AI-powered tools for 3D model generation",
   "type": "module",
   "main": "src/index.js",
@@ -37,5 +37,6 @@
     }
   ],
   "dependencies": {
+    "node-fetch": "^2.6.7"
   }
 }
