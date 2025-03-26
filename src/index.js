@@ -1,13 +1,13 @@
 // src/index.js
-import { textTo3d } from './services/textTo3d.js';
 
-// Create the meshifai object with all services
-const meshifai = {
-  textTo3d
+import { textTo3d, generateTexturedModel, generateUntexturedModel } from './services/textTo3d.js';
+
+const meshifai = { 
+  textTo3d,
+  generateTexturedModel,
+  generateUntexturedModel
 };
 
-// Named export for direct import
-export { textTo3d };
+export { textTo3d, generateTexturedModel, generateUntexturedModel };
 
-// Default export for object-style import
 export default meshifai;
