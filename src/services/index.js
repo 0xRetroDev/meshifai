@@ -5,8 +5,8 @@ async function generateModels() {
     try {
       // 1. Generate a textured 3D model (default)
       // console.log('Generating textured 3D model...');
-      //const texturedResult = await meshifai.textTo3d('A red apple');
-      //console.log(`Textured model URL: ${texturedResult.modelUrl}`);
+      // const texturedResult = await meshifai.textTo3d('A red apple', {textured: true, polygons: 25000});
+      // console.log(`Textured model URL: ${texturedResult.modelUrl}`); 
       
       // 2. Generate an untextured 3D model
       //console.log('Generating untextured 3D model...');

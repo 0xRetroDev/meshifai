@@ -1,10 +1,10 @@
-// src/services/cube3dService.js
-// Service for generating untextured 3D models with Cube3D
+// src/services/untexturedService.js
+// Service for generating untextured 3D models
 
 import fetch from 'node-fetch';
 
 /**
- * Generates an untextured 3D model using Cube3D
+ * Generates an untextured 3D model
  * @param {string} prompt - Text description of the 3D model
  * @param {Object} options - Optional parameters
  * @param {number} options.variance - Variance parameter (default: 0)
@@ -81,7 +81,7 @@ export async function generateUntexturedModel(prompt, options = {}) {
       throw new Error(`Failed to parse model data: ${error.message}`);
     }
   } catch (error) {
-    console.error(`Cube3D error: ${error.message}`);
+    console.error(`Untextured model error: ${error.message}`);
     throw new Error(`Failed to generate untextured 3D model: ${error.message}`);
   }
 }

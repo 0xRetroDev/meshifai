@@ -1,7 +1,8 @@
 // src/services/textTo3d.js
 
-import { generateTexturedModel } from './hunyuan3dService.js';
-import { generateUntexturedModel } from './cube3dService.js';
+import { generateTexturedModel } from './texturedService.js';
+import { generateUntexturedModel } from './untexturedService.js';
+import { checkAvailability } from './healthCheckService.js';
 
 /** 
  * Generates a 3D model from a text prompt 
@@ -9,6 +10,7 @@ import { generateUntexturedModel } from './cube3dService.js';
  * @param {Object} options
  * @param {boolean} options.textured 
  * @param {number} options.variance 
+ * @param {number} options.polygons 
  * @returns {Promise<{modelUrl: string, textured: boolean}>} 
  */
 export async function textTo3d(prompt, options = {}) {
@@ -16,15 +18,15 @@ export async function textTo3d(prompt, options = {}) {
     throw new Error('A text prompt is required');
   }
 
-  const { textured = false, variance = 0.3 } = options;
+  const { textured = false, variance = 0.3, polygons = 25000 } = options;
 
   try {
     if (textured) {
-      // Generate a textured model using Hunyuan3D
-      const modelUrl = await generateTexturedModel(prompt);
+      // Generate a textured model
+      const modelUrl = await generateTexturedModel(prompt, { polygons });
       return { modelUrl, textured: true };
     } else {
-      // Generate an untextured model using Cube3D
+      // Generate an untextured model
       const modelUrl = await generateUntexturedModel(prompt, { variance });
       return { modelUrl, textured: false };
     }
@@ -34,5 +36,12 @@ export async function textTo3d(prompt, options = {}) {
   }
 }
 
+/**
+ * Check which services are currently available
+ * @returns {Promise<{untextured: boolean, textured: boolean}>} Object indicating service availability
+ */
+export async function checkServiceAvailability() {
+  return await checkAvailability();
+}
 
 export { generateTexturedModel, generateUntexturedModel };
