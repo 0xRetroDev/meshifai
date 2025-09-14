@@ -1,5 +1,7 @@
 # MeshifAI
 
+`I'm working on updating the model structure to use a new, more reliable set of endpoints. Please be patient as I work through it and release the new version of Meshifai`
+
 AI-powered tools for 3D model generation
 
 ![image](https://github.com/user-attachments/assets/33fe2890-45d8-4d6b-af55-3bc3430a53d1)
