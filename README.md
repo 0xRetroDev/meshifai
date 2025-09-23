@@ -1,7 +1,5 @@
 # MeshifAI
 
-`I'm working on updating the model structure to use a new, more reliable set of endpoints. Please be patient as I work through it and release the new version of Meshifai`
-
 AI-powered tools for 3D model generation
 
 ![image](https://github.com/user-attachments/assets/33fe2890-45d8-4d6b-af55-3bc3430a53d1)
@@ -25,12 +23,11 @@ import meshifai from '@0xretrodev/meshifai';
 const result = await meshifai.textTo3d('A red apple');
 console.log(`Download URL: ${result.modelUrl}`);
 
-// Generate an untextured model with custom variance (0-1)
-// Higher values = more creative, lower = more precise
-const customResult = await meshifai.textTo3d('A red apple', { 
-  variance: 0.5
+// Generate an untextured model with high resolution (better quality, slower)
+const highResResult = await meshifai.textTo3d('A red apple', { 
+  highRes: true
 });
-console.log(`Download URL: ${customResult.modelUrl}`);
+console.log(`Download URL: ${highResResult.modelUrl}`);
 
 // Generate a textured model with PBR materials
 const texturedResult = await meshifai.textTo3d('A red apple', { 
@@ -62,7 +59,9 @@ console.log(`Untextured API available: ${availability.untextured}`);
 ### Untextured Models
 - Faster generation (typically 5-15 seconds)
 - Simple geometry without materials
-- Controllable creativity with the `variance` parameter
+- Quality control with the `highRes` parameter:
+  - `false` (default): Standard quality, faster generation
+  - `true`: High resolution, better quality but slower generation
 - Reliable for basic shapes and prototyping
 
 ### Textured Models (PBR)
@@ -81,6 +80,15 @@ The generated 3D models are in `.glb` format (GL Transmission Format Binary), wh
 - Game engines like Unity and Unreal
 - Web-based 3D viewers
 - AR/VR applications
+
+## API Parameters
+
+### Untextured Models
+- `highRes` (boolean, default: `false`): Enable high-resolution mode for better quality
+
+### Textured Models
+- `textured` (boolean): Set to `true` to generate textured models
+- `polygons` (number, default: `25000`): Higher values produce better quality
 
 ## Future Services
 

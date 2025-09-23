@@ -7,12 +7,12 @@ import fetch from 'node-fetch';
  * Generates an untextured 3D model
  * @param {string} prompt - Text description of the 3D model
  * @param {Object} options - Optional parameters
- * @param {number} options.variance - Variance parameter (default: 0)
+ * @param {boolean} options.highRes - Whether to use high resolution mode (default: false)
  * @returns {Promise<string>} - URL to the 3D model file
  */
 export async function generateUntexturedModel(prompt, options = {}) {
   try {
-    const { variance = 0 } = options;
+    const { highRes = false } = options;
     
     // Base URLs for API interaction
     const API_BASE_URL = 'https://roblox-cube3d-interactive.hf.space/gradio_api';
@@ -25,7 +25,7 @@ export async function generateUntexturedModel(prompt, options = {}) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        data: [prompt, variance]
+        data: [prompt, false, 1, 1, 1, highRes]
       })
     });
     
@@ -42,8 +42,9 @@ export async function generateUntexturedModel(prompt, options = {}) {
     }
     
     // Step 2: Wait for the model to generate
-    // The model typically takes 5-15 seconds to generate
-    await new Promise(resolve => setTimeout(resolve, 12000));
+    // High-res models may take longer to generate
+    const waitTime = highRes ? 20000 : 12000; // 20s for high-res, 12s for standard
+    await new Promise(resolve => setTimeout(resolve, waitTime));
     
     // Step 3: Fetch the result directly
     const resultResponse = await fetch(`${API_BASE_URL}/call/handle_text_prompt/${eventId}`);
