@@ -2,6 +2,8 @@
 
 AI-powered tools for 3D model generation
 
+[Visit the website](https://meshifai.com/)
+
 ![image](https://github.com/user-attachments/assets/33fe2890-45d8-4d6b-af55-3bc3430a53d1)
 
 ## Installation
